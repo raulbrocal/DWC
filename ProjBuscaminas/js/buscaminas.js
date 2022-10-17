@@ -1,14 +1,14 @@
 function AppFuncionando() {
     // Se piden los datos al usuario
-        let maxFilas = prompt('¿Cuántas filas quieres?');
-        let maxColumnas = prompt('¿Cuántas columnas quieres?');
-        let numMinas = prompt('¿Cuántas minas quieres introducir?');
-    
-        tableroBuscaminas = crearArrayTablero(maxFilas, maxColumnas);
-        tableroBuscaminas = colocarMinas(tableroBuscaminas, numMinas, maxFilas, maxColumnas);
-        tableroBuscaminas = contarMinas (tableroBuscaminas, maxFilas, maxColumnas)
-        pintarTablero(tableroBuscaminas, maxFilas, maxColumnas);
-    }
+    let maxFilas = prompt('¿Cuántas filas quieres?');
+    let maxColumnas = prompt('¿Cuántas columnas quieres?');
+    let numMinas = prompt('¿Cuántas minas quieres introducir?');
+
+    tableroBuscaminas = crearArrayTablero(maxFilas, maxColumnas);
+    tableroBuscaminas = colocarMinas(tableroBuscaminas, numMinas, maxFilas, maxColumnas);
+    tableroBuscaminas = contarMinas(tableroBuscaminas, maxFilas, maxColumnas)
+    pintarTablero(tableroBuscaminas, maxFilas, maxColumnas);
+}
 
 // Crear array bidimensional para guardar las minas
 function crearArrayTablero(maxFilas, maxColumnas) {
