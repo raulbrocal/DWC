@@ -10,9 +10,10 @@ function AppFuncionando() {
     pintarTablero(tableroBuscaminas, maxFilas, maxColumnas);
 }
 
-// Crear array bidimensional para guardar las minas
-function crearArrayTablero(maxFilas, maxColumnas) {
 
+
+function crearArrayTablero(maxFilas, maxColumnas) {
+    // Crear array bidimensional para guardar las minas
     let arrayTablero = [];
 
     for (let fila = 0; fila < maxFilas; fila++) {
@@ -23,16 +24,14 @@ function crearArrayTablero(maxFilas, maxColumnas) {
         }
     }
 
-    return arrayTablero;
-
+    return arrayTablero
 }
 
-
-function colocarMinas(maxFilas, maxColumnas, numMinas, arrayTablero) {
-
+function colocarMinas(arrayTablero, numMinas, maxFilas, maxColumnas) {
+    let contadorMinas = 0;
     let posFila;
     let posColumna;
-    let contadorMinas = 0;
+
 
     while (contadorMinas < numMinas) {
         posFila = Math.floor(Math.random() * maxFilas);
@@ -43,10 +42,11 @@ function colocarMinas(maxFilas, maxColumnas, numMinas, arrayTablero) {
             contadorMinas++;
         };
     };
+
+    return arrayTablero
 }
 
-function crearTablero(maxFilas, maxColumnas, arrayTablero) {
-
+function contarMinas(arrayTablero, maxFilas, maxColumnas) {
     let numMinasAlrededor;
 
     for (let fila = 0; fila < maxFilas; fila++) {
@@ -68,19 +68,18 @@ function crearTablero(maxFilas, maxColumnas, arrayTablero) {
             }
         }
     }
+    return arrayTablero
 }
 
-// Creamos el tablero en html
-
-function pintarTablero(arrayTablero, maxFilas, maxColumnas) {
-
+function pintarTablero(tablero, filas, columnas) {
+    // Creamos el tablero en html
     document.write('<table>');
 
-    for (let i = 0; i < maxFilas; i++) {
+    for (let i = 0; i < filas; i++) {
         document.write('<tr>');
 
-        for (let j = 0; j < maxColumnas; j++) {
-            document.write('<td>' + arrayTablero[i][j] + '</td>');
+        for (let j = 0; j < columnas; j++) {
+            document.write('<td>' + tablero[i][j] + '</td>');
         }
 
         document.write('</tr>');
@@ -89,3 +88,4 @@ function pintarTablero(arrayTablero, maxFilas, maxColumnas) {
 
 }
 
+AppFuncionando();
