@@ -37,6 +37,22 @@ class Tablero {
         }
         document.write('</table>');
     }
+
+    modificarFilas(nuevasFilas){
+    // Modificar el número de filas y volver a crear el tablero con las filas nuevas.
+
+        this.filas = nuevasFilas;
+        this.crearTablero();
+
+    }
+
+    modificarColumnas(nuevasColumnas) {
+    // Modificar el número de columnas y volver a crear el tablero con las columnas nuevas.
+
+        this.columnas = nuevasColumnas;
+        this.crearTablero();
+        
+    }
 }
 
 const buscaminas = new Tablero(4, 4);
