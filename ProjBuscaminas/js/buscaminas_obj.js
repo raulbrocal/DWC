@@ -30,7 +30,7 @@ class Tablero {
             document.write('<tr>');
 
             for (let j = 0; j < this.columnas; j++) {
-                document.write('<td>' + this.arrayTablero[i][j] + '</td>');
+                document.write(`<td>${this.arrayTablero[i][j]}</td>`);
             }
 
             document.write('</tr>');
@@ -39,5 +39,5 @@ class Tablero {
     }
 }
 
-const buscaminas = new Tablero(3, 4);
+const buscaminas = new Tablero(4, 4);
 console.log(buscaminas.arrayTablero);
