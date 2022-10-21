@@ -4,6 +4,7 @@ class Tablero {
         // Datos necesarios para crear el tablero.
         this.numFilasColumnas();
         this.crearTablero();
+        this.dibujarTablero();
     }
 
     numFilasColumnas() {
@@ -28,6 +29,23 @@ class Tablero {
             }
         }
 
+    }
+
+    dibujarTablero() {
+
+        // Crear el tablero en formato html
+        document.write('<table>');
+
+        for (let i = 0; i < this.filas; i++) {
+            document.write('<tr>');
+
+            for (let j = 0; j < this.columnas; j++) {
+                document.write(`<td>${this.arrayTablero[i][j]}</td>`);
+            }
+
+            document.write('</tr>');
+        }
+        document.write('</table>');
     }
 
 }
