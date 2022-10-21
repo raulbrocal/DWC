@@ -111,4 +111,3 @@ class Buscaminas extends Tablero {
 }
 
 let buscaminas1 = new Buscaminas(5, 5, 5);
-console.log(buscaminas1.arrayTablero);

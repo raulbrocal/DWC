@@ -9,14 +9,15 @@ class Tablero {
     numFilasColumnas() {
 
         // Se piden los datos al usuario
-        let filas = prompt('¿Cuántas filas quieres?');
-        let columnas = prompt('¿Cuántas columnas quieres?');
+        this.filas = prompt('¿Cuántas filas quieres?');
+        this.columnas = prompt('¿Cuántas columnas quieres?');
 
+        return this.filas, this.columnas;
     }
 
     crearTablero() {
 
-        // Crear array bidimensional para guardar las parejas.
+        // Crear array bidimensional en el que guardar las parejas.
         this.arrayTablero = [];
 
         for (let fila = 0; fila < this.filas; fila++) {
@@ -32,3 +33,4 @@ class Tablero {
 }
 
 let juegoMemoria = new Tablero();
+console.log(juegoMemoria);
