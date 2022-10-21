@@ -14,6 +14,20 @@ class Tablero {
 
     }
 
+    crearTablero() {
+
+        // Crear array bidimensional para guardar las parejas.
+        this.arrayTablero = [];
+
+        for (let fila = 0; fila < this.filas; fila++) {
+            this.arrayTablero[fila] = new Array(this.columnas);
+
+            for (let columna = 0; columna < this.columnas; columna++) {
+                this.arrayTablero[fila][columna] = '';
+            }
+        }
+
+    }
 
 }
 
