@@ -10,10 +10,18 @@ class Tablero {
     numFilasColumnas() {
 
         // Se piden los datos al usuario
-        this.filas = prompt('¿Cuántas filas quieres?');
-        this.columnas = prompt('¿Cuántas columnas quieres?');
+        let filas = 5;//prompt('¿Cuántas filas quieres?');
+        let columnas = 5;//prompt('¿Cuántas columnas quieres?');
 
-        return this.filas, this.columnas;
+        if (filas %2 == 0 || columnas % 2 == 0) {
+            return this.filas = filas, this.columnas = columnas;
+        }
+
+        do {
+            let filas = prompt('¿Cuántas filas quieres?');
+            let columnas = prompt('¿Cuántas columnas quieres?');
+        } while (filas %2 == 0 || columnas % 2 == 0);
+
     }
 
     crearTablero() {
