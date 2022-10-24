@@ -10,17 +10,16 @@ class Tablero {
     numFilasColumnas() {
 
         // Se piden los datos al usuario
-        let filas = 5;//prompt('¿Cuántas filas quieres?');
-        let columnas = 5;//prompt('¿Cuántas columnas quieres?');
+        let filas = prompt('¿Cuántas filas quieres?');
+        let columnas = prompt('¿Cuántas columnas quieres?');
 
-        if (filas %2 == 0 || columnas % 2 == 0) {
-            return this.filas = filas, this.columnas = columnas;
-        }
+        while (filas * columnas % 2 != 0 || filas < 2 || columnas < 2) {
+            alert("No es posible tener filas y columnas impares o menores que 2.");
+            filas = prompt('¿Cuántas filas quieres?');
+            columnas = prompt('¿Cuántas columnas quieres?');
+        };
 
-        do {
-            let filas = prompt('¿Cuántas filas quieres?');
-            let columnas = prompt('¿Cuántas columnas quieres?');
-        } while (filas %2 == 0 || columnas % 2 == 0);
+        return this.filas = filas, this.columnas = columnas;
 
     }
 
