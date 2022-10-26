@@ -4,7 +4,6 @@ class Tablero {
         // Datos necesarios para crear el tablero.
         this.numFilasColumnas();
         this.crearTablero();
-        this.dibujarTablero();
     }
 
     numFilasColumnas() {
@@ -78,40 +77,49 @@ class Tablero {
 class JuegoMemoria extends Tablero {
     constructor(filas, columnas) {
         super(filas, columnas);
-
+        debugger;
         this.colocarParejas();
-        this.crearTablero();
+        this.dibujarTablero();
     }
 
     colocarParejas() {
-        let parejas = ['&#10084;&#65039', '&#129505','&#10084;&#65039;&#8205;&#128293', '&#128155', '&#128154', '&#128153', '&#128156', '&#129294', '&#128420', '&#129293'];
+        debugger;
+        let parejas = ['&#10084;&#65039', '&#129505', '&#10084;&#65039;&#8205;&#128293', '&#128155', '&#128154', '&#128153', '&#128156', '&#129294', '&#128420', '&#129293'];
+
+        let contadorParejas = 0;
         let posFila;
         let posColumna;
-        let numParejas = 0;
+        let contador = 0;
 
-        let contador;
+        while (contadorParejas < (this.filas * this.columnas)) {
 
-        for (let i = 0; i < parejas.length; i++) {
-            for (let j = 0; j < parejas.length; j++) {
-                this.arrayTablero[i][j] = parejas[contador];
-                contador++;
+            do {
+
+                posFila = Math.floor(Math.random() * this.filas);
+                posColumna = Math.floor(Math.random() * this.columnas);
+
+                if (!this.arrayTablero[posFila][posColumna].startsWith('&')) {
+                    this.arrayTablero[posFila][posColumna] = parejas[contador];
+                    contadorParejas++;
+                    if (contadorParejas == (this.filas * this.columnas)) {
+                        break;
+                    };
+                };
+
+
+            } while (contadorParejas % 2 == 0);
+
+            contador++;
+
+            if (contador == parejas.length) {
+                contador = 0;
             }
-        }
 
-
-        // while (numParejas < this.filas*this.columnas) {
-        //     posFila = Math.floor(Math.random() * this.filas);
-        //     posColumna = Math.floor(Math.random() * this.columnas);
-
-        //     if (this.arrayTablero[posFila][posColumna] = '') {
-        //         this.arrayTablero[posFila][posColumna] = parejas[1];
-        //         numParejas++;
-        //     };
-        // };
+        };
 
         return this.arrayTablero
     }
 }
 
-let juegoMemoria = new Tablero();
+let juegoMemoria = new JuegoMemoria();
 console.log(juegoMemoria);
