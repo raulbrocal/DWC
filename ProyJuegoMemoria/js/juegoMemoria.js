@@ -13,7 +13,7 @@ class Tablero {
         let columnas = prompt('¿Cuántas columnas quieres?');
 
         while (filas * columnas % 2 != 0 || filas < 2 || columnas < 2 || filas * columnas > 100) {
-            
+
             switch (filas * columnas % 2 != 0 || filas < 2 || columnas < 2 || filas * columnas > 100) {
                 case (filas < 2 || columnas < 2):
                     alert("No es posible tener un número de filas o columnas menores que 2.");
@@ -122,6 +122,7 @@ class JuegoMemoria extends Tablero {
     // Poner una interfaz bonita.
     // Mínimo dos parejas.
     // Pregunta sobre la Clase Number.
+    // README debe ir en la carpeta del proyecto, debe contenre instrucciones y normas.
 }
 
 let juegoMemoria = new JuegoMemoria();
