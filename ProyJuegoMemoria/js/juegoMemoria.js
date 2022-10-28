@@ -9,8 +9,8 @@ class Tablero {
     numFilasColumnas() {
 
         // Se piden los datos al usuario
-        let filas = 4;//prompt('¿Cuántas filas quieres?');
-        let columnas = 4;//prompt('¿Cuántas columnas quieres?');
+        let filas = prompt('¿Cuántas filas quieres?');
+        let columnas = prompt('¿Cuántas columnas quieres?');
 
         while (filas * columnas % 2 != 0 || filas < 2 || columnas < 2) {
             alert("No es posible tener filas y columnas impares o menores que 2.");
@@ -54,24 +54,6 @@ class Tablero {
         document.write('</table>');
     }
 
-    modificarFilas(nuevasFilas) {
-        // Modificar el número de filas y volver a crear el tablero con las filas nuevas.
-
-        this.filas = nuevasFilas;
-        this.crearTablero();
-
-    }
-
-    modificarColumnas(nuevasColumnas) {
-        // Modificar el número de columnas y volver a crear el tablero con las columnas nuevas.
-
-        this.columnas = nuevasColumnas;
-        this.crearTablero();
-
-    }
-
-
-
 }
 
 class JuegoMemoria extends Tablero {
@@ -83,7 +65,6 @@ class JuegoMemoria extends Tablero {
     }
 
     colocarParejas() {
-        debugger;
         let parejas = ['&#10084;&#65039', '&#129505', '&#10084;&#65039;&#8205;&#128293', '&#128155', '&#128154', '&#128153', '&#128156', '&#129294', '&#128420', '&#129293'];
 
         let contadorParejas = 0;
@@ -107,7 +88,7 @@ class JuegoMemoria extends Tablero {
                 };
 
 
-            } while (contadorParejas % 2 == 0);
+            } while (contadorParejas % 2 != 0 || contadorParejas == 1);
 
             contador++;
 
@@ -119,6 +100,11 @@ class JuegoMemoria extends Tablero {
 
         return this.arrayTablero
     }
+
+    // max 100 filas y columnas.
+    // No se podrán cambiar el número de filas ni de columnas durante el juego.
+    // Poner una interfaz bonita.
+    // Mínimo dos parejas.
 }
 
 let juegoMemoria = new JuegoMemoria();
