@@ -12,11 +12,27 @@ class Tablero {
         let filas = prompt('¿Cuántas filas quieres?');
         let columnas = prompt('¿Cuántas columnas quieres?');
 
-        while (filas * columnas % 2 != 0 || filas < 2 || columnas < 2) {
-            alert("No es posible tener filas y columnas impares o menores que 2.");
+        while (filas * columnas % 2 != 0 || filas < 2 || columnas < 2 || filas * columnas > 100) {
+            
+            switch (filas * columnas % 2 != 0 || filas < 2 || columnas < 2 || filas * columnas > 100) {
+                case (filas < 2 || columnas < 2):
+                    alert("No es posible tener un número de filas o columnas menores que 2.");
+                    break;
+                case filas * columnas > 100:
+                    alert("No es posible crear un tablero mayor de 100 parejas.");
+                    break;
+                case filas != Number(filas) || columnas != Number(columnas):
+                    alert("Sólo se admiten valores numéricos.");
+                    break;
+                case filas * columnas % 2 != 0:
+                    alert("No es posible generar parejas al tener ambos números impares.");
+                    break;
+            }
+
             filas = prompt('¿Cuántas filas quieres?');
             columnas = prompt('¿Cuántas columnas quieres?');
-        };
+
+        }
 
         return this.filas = filas, this.columnas = columnas;
 
@@ -59,7 +75,7 @@ class Tablero {
 class JuegoMemoria extends Tablero {
     constructor(filas, columnas) {
         super(filas, columnas);
-        debugger;
+        //debugger;
         this.colocarParejas();
         this.dibujarTablero();
     }
@@ -105,6 +121,7 @@ class JuegoMemoria extends Tablero {
     // No se podrán cambiar el número de filas ni de columnas durante el juego.
     // Poner una interfaz bonita.
     // Mínimo dos parejas.
+    // Pregunta sobre la Clase Number.
 }
 
 let juegoMemoria = new JuegoMemoria();
