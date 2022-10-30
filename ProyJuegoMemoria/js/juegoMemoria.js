@@ -1,3 +1,9 @@
+document.write('<h1>Juego de memoria</h1>');
+document.write('<br>');
+document.write('<h2>Raúl Brocal</h2>');
+document.write('<br>');
+
+
 class Tablero {
 
     constructor() {
@@ -11,7 +17,7 @@ class Tablero {
         // Se piden los datos al usuario
         let filas = prompt('¿Cuántas filas quieres?');
         let columnas = prompt('¿Cuántas columnas quieres?');
-
+        
         while (filas * columnas % 2 != 0 || filas < 2 || columnas < 2 || filas * columnas > 100) {
 
             switch (filas * columnas % 2 != 0 || filas < 2 || columnas < 2 || filas * columnas > 100) {
@@ -56,6 +62,7 @@ class Tablero {
     dibujarTablero() {
 
         // Crear el tablero en formato html
+
         document.write('<table>');
 
         for (let i = 0; i < this.filas; i++) {
@@ -124,6 +131,7 @@ class JuegoMemoria extends Tablero {
     // Pregunta sobre la Clase Number.
     // README debe ir en la carpeta del proyecto, debe contenre instrucciones y normas.
 }
+
 
 let juegoMemoria = new JuegoMemoria();
 console.log(juegoMemoria);
