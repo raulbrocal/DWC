@@ -18,14 +18,15 @@ class Tablero {
         let filas = prompt('¿Cuántas filas quieres?');
         let columnas = prompt('¿Cuántas columnas quieres?');
         
-        while (filas * columnas % 2 != 0 || filas < 2 || columnas < 2 || filas * columnas > 100) {
+        // Casos en los que no se puede crear el tablero.
+        while (filas * columnas % 2 != 0 || filas < 2 || columnas < 2 || filas > 100 || columnas > 100) {
 
             switch (filas * columnas % 2 != 0 || filas < 2 || columnas < 2 || filas * columnas > 100) {
-                case (filas < 2 || columnas < 2):
+                case filas < 2 || columnas < 2:
                     alert("No es posible tener un número de filas o columnas menores que 2.");
                     break;
-                case filas * columnas > 100:
-                    alert("No es posible crear un tablero mayor de 100 parejas.");
+                case filas > 100 || columnas > 100:
+                    alert("No es posible crear un tablero con más de 100 filas o columnas.");
                     break;
                 case filas != Number(filas) || columnas != Number(columnas):
                     alert("Sólo se admiten valores numéricos.");
@@ -88,8 +89,10 @@ class JuegoMemoria extends Tablero {
     }
 
     colocarParejas() {
+        // Array de emojis que formaran las parejas
         let parejas = ['&#10084;&#65039', '&#129505', '&#10084;&#65039;&#8205;&#128293', '&#128155', '&#128154', '&#128153', '&#128156', '&#129294', '&#128420', '&#129293'];
 
+        // Colocamos de forma aleatoria las parejas necesarias.
         let contadorParejas = 0;
         let posFila;
         let posColumna;
@@ -124,14 +127,9 @@ class JuegoMemoria extends Tablero {
         return this.arrayTablero
     }
 
-    // max 100 filas y columnas.
-    // No se podrán cambiar el número de filas ni de columnas durante el juego.
-    // Poner una interfaz bonita.
-    // Mínimo dos parejas.
-    // Pregunta sobre la Clase Number.
-    // README debe ir en la carpeta del proyecto, debe contenre instrucciones y normas.
+
 }
 
-
+// Iniciamos el juego.
 let juegoMemoria = new JuegoMemoria();
 console.log(juegoMemoria);
