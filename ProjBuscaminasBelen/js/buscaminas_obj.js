@@ -35,6 +35,86 @@ class Tablero {
         document.write('</table>');
     }
 
+    dibujarTableroDOM() {
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+            let contenedor = document.documentElement;
+
+            let tabla = document.createElement("table");
+
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            let tdText = document.createTextNode("");
+
+            for (let i = 0; i < this.filas; i++) {
+    
+                for (let j = 0; j < this.columnas; j++) {
+                    td = document.createElement("td");
+                    tdText = document.createTextNode(this.arrayTablero[i][j]);
+                    td.appendChild(tdText);
+                    tr.appendChild(td);
+                }
+
+            }
+
+            td.appendChild(tdText);
+            tr.appendChild(td);
+
+            td = document.createElement("td");
+            tdText = document.createTextNode("2");
+            td.appendChild(tdText);
+            tr.appendChild(td);
+
+            td = document.createElement("td");
+            tdText = document.createTextNode("3");
+            td.appendChild(tdText);
+            tr.appendChild(td);
+
+            tabla.appendChild(tr);
+
+            tr = document.createElement("tr");
+
+            td = document.createElement("td");
+            tdText = document.createTextNode("4");
+            td.appendChild(tdText);
+            tr.appendChild(td);
+
+            td = document.createElement("td");
+            tdText = document.createTextNode("5");
+            td.appendChild(tdText);
+            tr.appendChild(td);
+
+            td = document.createElement("td");
+            tdText = document.createTextNode("6");
+            td.appendChild(tdText);
+            tr.appendChild(td);
+
+            tabla.appendChild(tr);
+
+            tr = document.createElement("tr");
+
+            td = document.createElement("td");
+            tdText = document.createTextNode("7");
+            td.appendChild(tdText);
+            tr.appendChild(td);
+
+            td = document.createElement("td");
+            tdText = document.createTextNode("8");
+            td.appendChild(tdText);
+            tr.appendChild(td);
+
+            td = document.createElement("td");
+            tdText = document.createTextNode("9");
+            td.appendChild(tdText);
+            tr.appendChild(td);
+
+            tabla.appendChild(tr);
+
+            contenedor.appendChild(tabla);
+        });
+
+    }
+
     modificarFilas(nuevasFilas) {
         // Modificar el número de filas y volver a crear el tablero con las filas nuevas
         this.filas = nuevasFilas;
@@ -104,4 +184,4 @@ class Buscaminas extends Tablero {
 
 let buscaminas1 = new Buscaminas(5, 5, 5);
 console.log(buscaminas1.arrayTablero);
-buscaminas1.dibujarTablero();
+buscaminas1.dibujarTableroDOM();
