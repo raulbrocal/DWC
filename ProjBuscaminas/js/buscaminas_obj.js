@@ -2,26 +2,24 @@ class Tablero {
     constructor(filas, columnas) {
         this.filas = filas;
         this.columnas = columnas;
+
         this.crearTablero();
     }
 
     crearTablero() {
-
         // Crear array bidimensional para guardar las minas
         this.arrayTablero = [];
 
         for (let fila = 0; fila < this.filas; fila++) {
-            this.arrayTablero[fila] = new Array(this.columnas);
+            this.arrayTablero[fila] = [];
 
             for (let columna = 0; columna < this.columnas; columna++) {
                 this.arrayTablero[fila][columna] = '';
             }
         }
-
     }
 
-    dibujarTablero() {
-
+    dibujarTableroHTML() {
         // Creamos el tablero en html
         document.write('<table>');
 
@@ -29,7 +27,7 @@ class Tablero {
             document.write('<tr>');
 
             for (let j = 0; j < this.columnas; j++) {
-                document.write(`<td>${this.arrayTablero[i][j]}</td>`);
+                document.write(`<td></td>`);
             }
 
             document.write('</tr>');
@@ -37,21 +35,41 @@ class Tablero {
         document.write('</table>');
     }
 
+    dibujarTableroDOM(){
+        // Creamos el tablero en DOM
+        let tabla = document.createElement('table');
+        let fila;
+        let columna;
+
+        for (let i = 0; i < this.filas; i++) {
+            fila = document.createElement('tr');
+            tabla.appendChild(fila);
+
+            for (let j = 0; j < this.columnas; j++) {
+                columna = document.createElement('td');
+                fila.appendChild(columna);
+            }
+        }
+
+        document.body.appendChild(tabla);
+    }
+    
+
     modificarFilas(nuevasFilas) {
-        // Modificar el número de filas y volver a crear el tablero con las filas nuevas.
-
+        // Modificar el número de filas y volver a crear el tablero con las filas nuevas
         this.filas = nuevasFilas;
-        this.crearTablero();
 
+        this.crearTablero();
     }
 
     modificarColumnas(nuevasColumnas) {
-        // Modificar el número de columnas y volver a crear el tablero con las columnas nuevas.
-
+        // Modificar el número de columnas y volver a crear el tablero con las columnas nuevas
         this.columnas = nuevasColumnas;
-        this.crearTablero();
 
+        this.crearTablero();
     }
+
+
 }
 
 class Buscaminas extends Tablero {
@@ -61,7 +79,6 @@ class Buscaminas extends Tablero {
 
         this.colocarMinas();
         this.colocarNumMinas();
-        this.dibujarTablero();
     }
 
     colocarMinas() {
@@ -79,8 +96,6 @@ class Buscaminas extends Tablero {
                 contadorMinas++;
             };
         };
-
-        return this.arrayTablero
     }
 
     colocarNumMinas() {
@@ -101,14 +116,14 @@ class Buscaminas extends Tablero {
                         }
                         this.arrayTablero[fila][columna] = numMinasAlrededor;
                     }
-
                 }
             }
         }
-        return this.arrayTablero;
     }
-
 }
 
-let buscaminas1 = new Buscaminas(5, 5, 5);
-console.log(buscaminas1.arrayTablero);
+window.onload = function() {
+    let buscaminas1 = new Buscaminas(5, 5, 5);
+    buscaminas1.dibujarTableroDOM();
+}
+

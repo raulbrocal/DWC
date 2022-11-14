@@ -1,19 +1,19 @@
 function AppFuncionando() {
-    // Se piden los datos al usuario
+// Se piden los datos al usuario
     let maxFilas = prompt('¿Cuántas filas quieres?');
     let maxColumnas = prompt('¿Cuántas columnas quieres?');
     let numMinas = prompt('¿Cuántas minas quieres introducir?');
 
     tableroBuscaminas = crearArrayTablero(maxFilas, maxColumnas);
     tableroBuscaminas = colocarMinas(tableroBuscaminas, numMinas, maxFilas, maxColumnas);
-    tableroBuscaminas = contarMinas(tableroBuscaminas, maxFilas, maxColumnas)
+    tableroBuscaminas = contarMinas (tableroBuscaminas, maxFilas, maxColumnas)
     pintarTablero(tableroBuscaminas, maxFilas, maxColumnas);
 }
-
+    
 
 
 function crearArrayTablero(maxFilas, maxColumnas) {
-    // Crear array bidimensional para guardar las minas
+// Crear array bidimensional para guardar las minas
     let arrayTablero = [];
 
     for (let fila = 0; fila < maxFilas; fila++) {
@@ -27,7 +27,7 @@ function crearArrayTablero(maxFilas, maxColumnas) {
     return arrayTablero
 }
 
-function colocarMinas(arrayTablero, numMinas, maxFilas, maxColumnas) {
+function colocarMinas (arrayTablero, numMinas,maxFilas, maxColumnas) {
     let contadorMinas = 0;
     let posFila;
     let posColumna;
@@ -46,7 +46,7 @@ function colocarMinas(arrayTablero, numMinas, maxFilas, maxColumnas) {
     return arrayTablero
 }
 
-function contarMinas(arrayTablero, maxFilas, maxColumnas) {
+function contarMinas (arrayTablero, maxFilas, maxColumnas) {
     let numMinasAlrededor;
 
     for (let fila = 0; fila < maxFilas; fila++) {
@@ -64,7 +64,6 @@ function contarMinas(arrayTablero, maxFilas, maxColumnas) {
                     }
                     arrayTablero[fila][columna] = numMinasAlrededor;
                 }
-
             }
         }
     }
@@ -72,16 +71,16 @@ function contarMinas(arrayTablero, maxFilas, maxColumnas) {
 }
 
 function pintarTablero(tablero, filas, columnas) {
-    // Creamos el tablero en html
+// Creamos el tablero en html
     document.write('<table>');
 
     for (let i = 0; i < filas; i++) {
         document.write('<tr>');
-
+    
         for (let j = 0; j < columnas; j++) {
-            document.write('<td>' + tablero[i][j] + '</td>');
+            document.write(`<td>${tablero[i][j]}</td>`);
         }
-
+    
         document.write('</tr>');
     }
     document.write('</table>');
