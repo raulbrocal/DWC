@@ -22,6 +22,7 @@ class TableroMemorin extends Tablero {
         }
     }
     desordenarArray(array) {
+        points.sort(function(a, b){return a - b});
         return array.sort(() => 0.5 - Math.random());
     }
 }
