@@ -30,12 +30,29 @@ class Tablero {
             tabla.appendChild(fila);
 
             for (let j = 0; j < this.columnas; j++) {
+
                 columna = document.createElement('td');
-                fila.appendChild(columna);
+
                 columna.innerHTML = this.arrayTablero[i][j];
+                columna.id = `f${i}_c${j}`;
+                columna.dataset.fila = i;
+                columna.dataset.columna = j;
+                fila.appendChild(columna);
+
+                columna.addEventListener('click', this.despejar);
+                columna.addEventListener('contextmenu', this.marcar);
             }
         }
         document.body.appendChild(tabla);
+    }
+
+    despejar() {
+        let parrafos = document.getElementsByTagName();
+        alert(`Marcada celda ${parrafos}`);
+    }
+
+    marcar() {
+        alert("He marcado");
     }
 
 
