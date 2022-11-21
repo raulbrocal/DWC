@@ -20,7 +20,7 @@ class Tablero {
     }
 
     dibujarTableroDOM() {
-
+        // Creamos el tablero en DOM
         let tabla = document.createElement('table');
         let fila;
         let columna;
@@ -30,10 +30,7 @@ class Tablero {
             tabla.appendChild(fila);
 
             for (let j = 0; j < this.columnas; j++) {
-
                 columna = document.createElement('td');
-
-                columna.innerHTML = this.arrayTablero[i][j];
                 columna.id = `f${i}_c${j}`;
                 columna.dataset.fila = i;
                 columna.dataset.columna = j;
@@ -47,12 +44,29 @@ class Tablero {
     }
 
     despejar() {
-        let parrafos = document.getElementsByTagName();
-        alert(`Marcada celda ${parrafos}`);
+        alert("Despejando");
     }
 
     marcar() {
-        alert("He marcado");
+        document.oncontextmenu = function(){return false};
+
+        let id = document.getElementById(this.id);
+
+        switch (id.innerHTML) {
+
+            case "&#x1F6A9":
+                id.innerHTML = "&#x2753";
+                break;
+
+            case "&#x2753":
+                id.innerHTML = "";
+                break;
+
+            default:
+                id.innerHTML = "&#x1F6A9";
+                break;
+        }
+
     }
 
 
@@ -123,6 +137,5 @@ class Buscaminas extends Tablero {
 
 window.onload = function () {
     let buscaminas1 = new Buscaminas(5, 5, 5);
-    console.log(buscaminas1.arrayTablero);
     buscaminas1.dibujarTableroDOM();
 }
