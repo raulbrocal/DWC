@@ -19,7 +19,23 @@ class Tablero {
         }
     }
 
-    dibujarTableroDOM() {
+    dibujarTableroHTML() {
+        // Creamos el tablero en html
+        document.write('<table>');
+
+        for (let i = 0; i < this.filas; i++) {
+            document.write('<tr>');
+
+            for (let j = 0; j < this.columnas; j++) {
+                document.write(`<td></td>`);
+            }
+
+            document.write('</tr>');
+        }
+        document.write('</table>');
+    }
+
+    dibujarTableroDOM(){
         // Creamos el tablero en DOM
         let tabla = document.createElement('table');
         let fila;
@@ -40,35 +56,29 @@ class Tablero {
                 columna.addEventListener('contextmenu', this.marcar);
             }
         }
+
         document.body.appendChild(tabla);
     }
 
     despejar() {
-        alert("Despejando");
+        let columna = this.dataset.columna;
+        let fila = this.dataset.fila;
+        alert(this.arrayTablero[fila][columna]);
     }
 
     marcar() {
-        document.oncontextmenu = function(){return false};
 
-        let id = document.getElementById(this.id);
-
-        switch (id.innerHTML) {
-
-            case "&#x1F6A9":
-                id.innerHTML = "&#x2753";
-                break;
-
-            case "&#x2753":
-                id.innerHTML = "";
-                break;
-
-            default:
-                id.innerHTML = "&#x1F6A9";
-                break;
-        }
-
+        // Utilizando los formatos UNICODE de JS
+        if (this.innerHTML == "") {
+            this.innerHTML = "\uD83D\uDEA9";
+        } else if (this.innerHTML == "\uD83D\uDEA9") {
+            this.innerHTML = "\u2754";
+        } else if(this.innerHTML == "\u2754") {
+            this.innerHTML = "";
+        };
+            
     }
-
+    
 
     modificarFilas(nuevasFilas) {
         // Modificar el número de filas y volver a crear el tablero con las filas nuevas
@@ -83,6 +93,8 @@ class Tablero {
 
         this.crearTablero();
     }
+
+
 }
 
 class Buscaminas extends Tablero {
@@ -135,7 +147,7 @@ class Buscaminas extends Tablero {
     }
 }
 
-window.onload = function () {
+window.onload = function() {
     let buscaminas1 = new Buscaminas(5, 5, 5);
     buscaminas1.dibujarTableroDOM();
 }
