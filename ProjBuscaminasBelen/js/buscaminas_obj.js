@@ -35,7 +35,7 @@ class Tablero {
         document.write('</table>');
     }
 
-    dibujarTableroDOM(){
+    dibujarTableroDOM() {
         // Creamos el tablero en DOM
         let tabla = document.createElement('table');
         let fila;
@@ -51,34 +51,11 @@ class Tablero {
                 columna.dataset.fila = i;
                 columna.dataset.columna = j;
                 fila.appendChild(columna);
-
-                columna.addEventListener('click', this.despejar);
-                columna.addEventListener('contextmenu', this.marcar);
             }
         }
 
         document.body.appendChild(tabla);
     }
-
-    despejar() {
-        let columna = this.dataset.columna;
-        let fila = this.dataset.fila;
-        alert(this.arrayTablero[fila][columna]);
-    }
-
-    marcar() {
-
-        // Utilizando los formatos UNICODE de JS
-        if (this.innerHTML == "") {
-            this.innerHTML = "\uD83D\uDEA9";
-        } else if (this.innerHTML == "\uD83D\uDEA9") {
-            this.innerHTML = "\u2754";
-        } else if(this.innerHTML == "\u2754") {
-            this.innerHTML = "";
-        };
-            
-    }
-    
 
     modificarFilas(nuevasFilas) {
         // Modificar el número de filas y volver a crear el tablero con las filas nuevas
@@ -93,7 +70,6 @@ class Tablero {
 
         this.crearTablero();
     }
-
 
 }
 
@@ -145,9 +121,68 @@ class Buscaminas extends Tablero {
             }
         }
     }
+
+    dibujarTableroDOM() {
+        super.dibujarTableroDOM();
+
+        let celda;
+
+        for (let i = 0; i < this.filas; i++) {
+            for (let j = 0; j < this.columnas; j++) {
+                celda = document.getElementById(`f${i}_c${j}`);
+
+                celda.addEventListener('click', this.despejar.bind(this));
+                celda.addEventListener('contextmenu', this.marcar.bind(this));
+            }
+        }
+    }
+
+    despejar(elEvento) {
+        let evento = elEvento || window.event;
+        let celda = evento.currentTarget;
+        let fila = celda.dataset.fila;
+        let columna = celda.dataset.columna;
+        let cadena = this.arrayTablero[fila][columna];
+
+        if (!isNaN(cadena)) {
+            celda.innerHTML = cadena
+        } else {
+
+            for (let i = 0; i < this.filas; i++) {
+                for (let j = 0; j < this.columnas; j++) {
+                    celda = document.getElementById(`f${i}_c${j}`);
+
+                    if (celda.innerHTML == "\uD83D\uDEA9") {
+                        if (this.arrayTablero[i][j] != "MINA") {
+                            celda.style.backgroundColor = "red";
+                        }
+                    }
+                    if (this.arrayTablero[i][j] == "MINA") {
+                        celda.innerHTML = cadena
+                    }
+                }
+            }
+            alert('Has perdido.');
+        }
+    };
+
+    marcar(elEvento) {
+        let evento = elEvento || window.event;
+        let celda = evento.currentTarget;
+        // Utilizando los formatos UNICODE de JS
+        if (celda.innerHTML == "") {
+            celda.innerHTML = "\uD83D\uDEA9";
+        } else if (celda.innerHTML == "\uD83D\uDEA9") {
+            celda.innerHTML = "\u2754";
+        } else if (celda.innerHTML == "\u2754") {
+            celda.innerHTML = "";
+        };
+
+    };
+
 }
 
-window.onload = function() {
-    let buscaminas1 = new Buscaminas(5, 5, 5);
+window.onload = function () {
+    var buscaminas1 = new Buscaminas(5, 5, 5);
     buscaminas1.dibujarTableroDOM();
 }
