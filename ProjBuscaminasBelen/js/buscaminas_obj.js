@@ -57,6 +57,9 @@ class Tablero {
         document.body.appendChild(tabla);
     }
 
+
+
+
     modificarFilas(nuevasFilas) {
         // Modificar el número de filas y volver a crear el tablero con las filas nuevas
         this.filas = nuevasFilas;
@@ -70,6 +73,7 @@ class Tablero {
 
         this.crearTablero();
     }
+
 
 }
 
@@ -135,6 +139,7 @@ class Buscaminas extends Tablero {
                 celda.addEventListener('contextmenu', this.marcar.bind(this));
             }
         }
+        console.log(this.arrayTablero);
     }
 
     despejar(elEvento) {
@@ -142,47 +147,92 @@ class Buscaminas extends Tablero {
         let celda = evento.currentTarget;
         let fila = celda.dataset.fila;
         let columna = celda.dataset.columna;
-        let cadena = this.arrayTablero[fila][columna];
 
-        if (!isNaN(cadena)) {
-            celda.innerHTML = cadena
-        } else {
+        let valorCelda = this.arrayTablero[fila][columna];
+        let esNumero = (valorCelda != 'MINA' && valorCelda != 0);
+        let esBomba = (valorCelda == 'MINA');
+        let esCero = (valorCelda == 0)
+        let bombaSeleccionadaMal;
 
-            for (let i = 0; i < this.filas; i++) {
-                for (let j = 0; j < this.columnas; j++) {
-                    celda = document.getElementById(`f${i}_c${j}`);
+        let rutaBandera = "file:///home/horabaixa/Escritorio/DWC/ProjBuscaminasBelen/imagenes/bandera.png";
 
-                    if (celda.innerHTML == "\uD83D\uDEA9") {
-                        if (this.arrayTablero[i][j] != "MINA") {
-                            celda.style.backgroundColor = "red";
+        let arrayFilas;
+        let arrayColumnas;
+
+        let maxFilas = this.arrayTablero.length;
+        let maxColumnas = this.arrayTablero[fila].length;
+
+        if (esNumero) {
+            celda.innerHTML = valorCelda;
+            celda.removeEventListener('click', this.despejar.bind(this));
+            celda.removeEventListener('contextmenu', this.marcar.bind(this));
+        } else if (esBomba) {
+
+            arrayFilas = celda.parentNode.parentNode.childNodes;
+            for (let tr of arrayFilas) {
+                arrayColumnas = tr.childNodes;
+                for (let td of arrayColumnas) {
+                    td.removeEventListener('click', this.despejar.bind(this));
+                    td.removeEventListener('contextmenu', this.marcar.bind(this));
+
+                    fila = td.dataset.fila;
+                    columna = td.dataset.columna;
+                    valorCelda = this.arrayTablero[fila][columna]
+                    if (td.lastChild != null) {
+                        bombaSeleccionadaMal = (td.lastChild.src == rutaBandera && valorCelda != 'MINA');
+
+                        if (bombaSeleccionadaMal) {
+                            td.lastChild.src = "";
+                            td.style.backgroundColor = 'red';
+                            td.innerHTML = valorCelda;
+                        } else if (valorCelda == 'MINA') {
+                            td.innerHTML = valorCelda;
                         }
-                    }
-                    if (this.arrayTablero[i][j] == "MINA") {
-                        celda.innerHTML = cadena
+                    } else if (valorCelda == 'MINA') {
+                        td.innerHTML = valorCelda;
                     }
                 }
             }
-            alert('Has perdido.');
+            alert(`¡HAS PERDIDO!`);
+        } else if (esCero) {
+            fila = parseInt(fila)
+            columna = parseInt(columna)
+            for (let cFila = fila - 1; cFila <= fila + 1; cFila++) {
+                if (cFila >= 0 && cFila < maxFilas) {
+                    for (let cColumna = columna - 1; cColumna <= columna + 1; cColumna++) {
+                        if (cColumna >= 0 && cColumna < maxColumnas &&
+                            this.arrayTablero[cFila][cColumna] != 'MINA') {
+                            valorCelda = this.arrayTablero[cFila][cColumna];
+                            this.despejar;
+                        }
+                    }
+                }
+            }
+
         }
-    };
+    }
 
     marcar(elEvento) {
         let evento = elEvento || window.event;
         let celda = evento.currentTarget;
-        // Utilizando los formatos UNICODE de JS
-        if (celda.innerHTML == "") {
-            celda.innerHTML = "\uD83D\uDEA9";
-        } else if (celda.innerHTML == "\uD83D\uDEA9") {
-            celda.innerHTML = "\u2754";
-        } else if (celda.innerHTML == "\u2754") {
-            celda.innerHTML = "";
-        };
+        // Utilizando el elemento img
+        let imagen = document.createElement('img');
+        imagen.style.height = "50px";
 
-    };
+        if (celda.lastChild == null) {
+            imagen.src = "imagenes/bandera.png";
+            celda.appendChild(imagen);
+        } else if (celda.lastChild.src == "file:///home/horabaixa/Escritorio/DWC/ProjBuscaminasBelen/imagenes/bandera.png") {
+            celda.lastChild.src = "imagenes/interrogante.png";
+        } else if (celda.lastChild.src == "file:///home/horabaixa/Escritorio/DWC/ProjBuscaminasBelen/imagenes/interrogante.png") {
+            celda.removeChild(celda.lastChild);
+        }
+
+    }
 
 }
 
 window.onload = function () {
-    var buscaminas1 = new Buscaminas(5, 5, 5);
+    let buscaminas1 = new Buscaminas(5, 5, 5);
     buscaminas1.dibujarTableroDOM();
 }
