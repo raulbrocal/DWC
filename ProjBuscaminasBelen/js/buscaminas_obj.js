@@ -50,6 +50,7 @@ class Tablero {
                 columna.id = `f${i}_c${j}`;
                 columna.dataset.fila = i;
                 columna.dataset.columna = j;
+                columna.dataset.despejado = false;
                 fila.appendChild(columna);
             }
         }
@@ -145,19 +146,26 @@ class Buscaminas extends Tablero {
     despejar(elEvento) {
         let evento = elEvento || window.event;
         let celda = evento.currentTarget;
-        let fila = celda.dataset.fila;
-        let columna = celda.dataset.columna;
+
+        this.despejarCelda(celda);
+    }
+
+    despejarCelda(celda) {
+        let fila = parseInt(celda.dataset.fila);
+        let columna = parseInt(celda.dataset.columna);
+        let estaDespejado = celda.dataset.despejado = true;
 
         let valorCelda = this.arrayTablero[fila][columna];
         let esNumero = (valorCelda != 'MINA' && valorCelda != 0);
         let esBomba = (valorCelda == 'MINA');
-        let esCero = (valorCelda == 0)
+        let esVacio = (valorCelda == 0)
         let bombaSeleccionadaMal;
 
         let rutaBandera = "file:///home/horabaixa/Escritorio/DWC/ProjBuscaminasBelen/imagenes/bandera.png";
 
         let arrayFilas;
         let arrayColumnas;
+        let celdaNueva;
 
         let maxFilas = this.arrayTablero.length;
         let maxColumnas = this.arrayTablero[fila].length;
@@ -194,16 +202,14 @@ class Buscaminas extends Tablero {
                 }
             }
             alert(`¡HAS PERDIDO!`);
-        } else if (esCero) {
-            fila = parseInt(fila)
-            columna = parseInt(columna)
+        } else if (esVacio) {
             for (let cFila = fila - 1; cFila <= fila + 1; cFila++) {
                 if (cFila >= 0 && cFila < maxFilas) {
                     for (let cColumna = columna - 1; cColumna <= columna + 1; cColumna++) {
-                        if (cColumna >= 0 && cColumna < maxColumnas &&
-                            this.arrayTablero[cFila][cColumna] != 'MINA') {
-                            valorCelda = this.arrayTablero[cFila][cColumna];
-                            this.despejar;
+                        if (cColumna >= 0 && cColumna < maxColumnas && estaDespejado) {
+                            celdaNueva = document.getElementById(`f${cFila}_c${cColumna}`);
+                            console.log(`f${cFila}_c${cColumna}`);
+                            /*this.despejar(celdaNueva);*/
                         }
                     }
                 }
