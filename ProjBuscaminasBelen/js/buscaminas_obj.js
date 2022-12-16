@@ -82,6 +82,7 @@ class Buscaminas extends Tablero {
     constructor(filas, columnas, numMinas) {
         super(filas, columnas);
         this.numMinas = numMinas;
+        this.numCeldas = 0;
 
         this.colocarMinas();
         this.colocarNumMinas();
@@ -157,6 +158,7 @@ class Buscaminas extends Tablero {
     despejarCelda(celda) {
         let fila = parseInt(celda.dataset.fila);
         let columna = parseInt(celda.dataset.columna);
+        let celdasDespejadas = (this.filas * this.columnas) - this.numMinas;
 
         // Marcar la celda despejada
         celda.dataset.despejado = true;
@@ -179,7 +181,7 @@ class Buscaminas extends Tablero {
 
         if (esNumero) {
             celda.innerHTML = valorCelda;
-
+            this.numCeldas++;
         } else if (esBomba) {
 
             arrayFilas = celda.parentNode.parentNode.childNodes;
@@ -209,7 +211,7 @@ class Buscaminas extends Tablero {
             }
             alert(`¡HAS PERDIDO!`);
         } else if (esVacio) {
-
+            this.numCeldas++;
             for (let cFila = fila - 1; cFila <= fila + 1; cFila++) {
                 if (cFila >= 0 && cFila < this.filas) {
                     for (let cColumna = columna - 1; cColumna <= columna + 1; cColumna++) {
@@ -217,7 +219,6 @@ class Buscaminas extends Tablero {
                             celdaNueva = document.getElementById(`f${cFila}_c${cColumna}`)
                             estaDespejado = (celdaNueva.dataset.despejado == 'true');
                             if (!estaDespejado) {
-                                console.log(`f${cFila}_c${cColumna}`);
                                 this.despejarCelda(celdaNueva);
                             }
                         }
@@ -225,7 +226,10 @@ class Buscaminas extends Tablero {
                 }
             }
         }
-
+        
+        if (this.numCeldas == celdasDespejadas) {
+            alert('Has ganado!');
+        }
     }
 
     marcar(elEvento) {
