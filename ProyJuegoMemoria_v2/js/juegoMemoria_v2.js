@@ -88,7 +88,7 @@ class TableroMemorin extends Tablero {
         super(numFilas, numColumnas);
         this.numCasillas = this.numFilas * this.numColumnas;
 
-        this.crearArrayImagenes(`imagenes/`);
+        this.crearArrayImagenes(`img/`);
 
         let numImgRepes = 2;
 
@@ -140,12 +140,13 @@ class TableroMemorin extends Tablero {
                 contador++;
             }
         }
+        console.log(this.tablero);
     }
 
 }
 
 window.onload = function () {
     // Iniciamos el juego.
-    let juegoMemoria = new Tablero();
+    let juegoMemoria = new TableroMemorin();
     juegoMemoria.dibujarTableroDOM();
 }
