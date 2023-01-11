@@ -131,6 +131,46 @@ class JuegoMemoria extends Tablero {
         return this.arrayTablero
     }
 
+    dibujarTableroDOM() {
+        super.dibujarTableroDOM();
+
+        let celda;
+
+        this.despejar = this.despejar.bind(this);
+
+        for (let i = 0; i < this.filas; i++) {
+            for (let j = 0; j < this.columnas; j++) {
+                celda = document.getElementById(`f${i}_c${j}`);
+
+                celda.addEventListener('click', this.despejar);
+            }
+        }
+    }
+
+    despejar(elEvento) {
+        let evento = elEvento || window.event;
+        let celda = evento.currentTarget;
+
+        this.despejarCelda(celda);
+        this.comprobarParejas(celda);
+    }
+
+    despejarCelda(celda) {
+        let fila = parseInt(celda.dataset.fila);
+        let columna = parseInt(celda.dataset.columna);
+
+        // Marcar la celda despejada
+        celda.style.backgroundColor = "lightgrey";
+        celda.removeEventListener('click', this.despejar);
+        celda.removeEventListener('contextmenu', this.marcar);
+
+        let valorCelda = this.arrayTablero[fila][columna];
+
+        celda.innerHTML = valorCelda;
+        
+        return valorCelda;
+    }
+
 }
 
 window.onload = function () {
