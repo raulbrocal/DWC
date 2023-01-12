@@ -128,6 +128,8 @@ class JuegoMemoria extends Tablero {
 
         };
 
+        console.log(this.arrayTablero);
+
         return this.arrayTablero
     }
 
@@ -152,7 +154,6 @@ class JuegoMemoria extends Tablero {
         let celda = evento.currentTarget;
 
         this.despejarCelda(celda);
-        this.comprobarParejas(celda);
     }
 
     despejarCelda(celda) {
@@ -166,9 +167,25 @@ class JuegoMemoria extends Tablero {
 
         let valorCelda = this.arrayTablero[fila][columna];
 
-        celda.innerHTML = valorCelda;
-        
-        return valorCelda;
+        if (this.primerEmoji == null) {
+            celda.innerHTML = valorCelda;
+            this.primerEmoji = valorCelda;
+        } else {
+            this.segundoEmoji = valorCelda;
+            celda.innerHTML = valorCelda;
+        }
+
+        console.log(this.segundoEmoji);
+
+        if (this.primerEmoji == this.segundoEmoji) {
+            alert('grande');
+        } else if (this.segundoEmoji === undefined) {
+            return;
+        } else {
+            this.primerEmoji.style.backgroundColor = "lightgrey";
+            this.segundoEmoji.style.backgroundColor = "lightgrey";
+        }
+
     }
 
 }
