@@ -15,7 +15,7 @@ tr,
 td {
     border: 2px solid black;
     border-collapse: collapse;
-    background-color: rgba(24, 22, 23, 0.288);
+    background-color: darkslategray;
 }
 
 td {

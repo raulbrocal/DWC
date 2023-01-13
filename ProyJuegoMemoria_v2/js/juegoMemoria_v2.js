@@ -162,28 +162,39 @@ class JuegoMemoria extends Tablero {
 
         // Marcar la celda despejada
         celda.style.backgroundColor = "lightgrey";
-        celda.removeEventListener('click', this.despejar);
-        celda.removeEventListener('contextmenu', this.marcar);
 
         let valorCelda = this.arrayTablero[fila][columna];
 
-        if (this.primerEmoji == null) {
+        if (this.primerEmoji === undefined) {
             celda.innerHTML = valorCelda;
+            this.celda1 = celda;
             this.primerEmoji = valorCelda;
         } else {
-            this.segundoEmoji = valorCelda;
             celda.innerHTML = valorCelda;
+            this.celda2 = celda;
+            this.segundoEmoji = valorCelda;
         }
 
         console.log(this.segundoEmoji);
 
         if (this.primerEmoji == this.segundoEmoji) {
-            alert('grande');
+
+            this.primerEmoji = undefined;
+            this.segundoEmoji = undefined;
+            this.celda1.removeEventListener('click', this.despejar);
+            this.celda2.removeEventListener('click', this.despejar);
         } else if (this.segundoEmoji === undefined) {
             return;
         } else {
-            this.primerEmoji.style.backgroundColor = "lightgrey";
-            this.segundoEmoji.style.backgroundColor = "lightgrey";
+
+            this.celda1.style.backgroundColor = "darkslategray";
+            this.celda2.style.backgroundColor = "darkslategray";
+
+            this.celda1.innerHTML = '';
+            this.celda2.innerHTML = '';
+
+            this.primerEmoji = undefined;
+            this.segundoEmoji = undefined;
         }
 
     }
