@@ -87,7 +87,6 @@ class Tablero {
 class JuegoMemoria extends Tablero {
     constructor(filas, columnas) {
         super(filas, columnas);
-        //debugger;
         this.colocarParejas();
         this.dibujarTableroDOM();
     }
@@ -135,7 +134,6 @@ class JuegoMemoria extends Tablero {
 
     dibujarTableroDOM() {
         super.dibujarTableroDOM();
-
         let celda;
 
         this.despejar = this.despejar.bind(this);
@@ -143,7 +141,6 @@ class JuegoMemoria extends Tablero {
         for (let i = 0; i < this.filas; i++) {
             for (let j = 0; j < this.columnas; j++) {
                 celda = document.getElementById(`f${i}_c${j}`);
-
                 celda.addEventListener('click', this.despejar);
             }
         }
@@ -183,6 +180,7 @@ class JuegoMemoria extends Tablero {
             this.segundoEmoji = undefined;
             this.celda1.removeEventListener('click', this.despejar);
             this.celda2.removeEventListener('click', this.despejar);
+
         } else if (this.segundoEmoji === undefined) {
             return;
         } else {
