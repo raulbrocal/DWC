@@ -84,7 +84,7 @@ class Tablero {
     }
 
     maxPuntuacion() {
-        let maxPuntuacion = (this.filas * this.columnas) * 10;
+        let maxPuntuacion = ((this.filas * this.columnas) * 10) / 2;
         let nodoMaxPuntuacion = document.getElementById("maxPuntuacion");
         nodoMaxPuntuacion.innerHTML = maxPuntuacion;
     }
@@ -92,8 +92,9 @@ class Tablero {
 }
 
 class JuegoMemoria extends Tablero {
-    constructor(filas, columnas) {
+    constructor(filas, columnas, _puntuacion) {
         super(filas, columnas);
+        this.puntuacion = 0;
         this.colocarParejas();
         this.dibujarTableroDOM();
     }
@@ -157,10 +158,6 @@ class JuegoMemoria extends Tablero {
         let evento = elEvento || window.event;
         let celda = evento.currentTarget;
 
-        this.despejarCelda(celda);
-    }
-
-    despejarCelda(celda) {
         let fila = parseInt(celda.dataset.fila);
         let columna = parseInt(celda.dataset.columna);
 
@@ -197,17 +194,16 @@ class JuegoMemoria extends Tablero {
                 this.celda2.removeEventListener('click', this.despejar);
 
                 let nodoPuntuacion = document.getElementById("puntuacion");
-                let puntuacion = this.puntuacion + 0;
 
                 switch (this.intentos) {
                     case this.intentos = 1:
-                        return nodoPuntuacion.innerHTML = puntuacion + 10;
+                        return nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 10;
                     case this.intentos = 2:
-                        return nodoPuntuacion.innerHTML = puntuacion + 5;
+                        return nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 5;
                     case this.intentos = 3:
-                        return nodoPuntuacion.innerHTML = puntuacion + 2.5;
+                        return nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 2.5;
                     case this.intentos > 3:
-                        return nodoPuntuacion.innerHTML = puntuacion + 0;
+                        return nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 0;
                 }
 
             } else if (this.segundoEmoji === undefined) {
