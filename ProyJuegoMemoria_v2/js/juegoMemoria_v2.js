@@ -174,34 +174,55 @@ class JuegoMemoria extends Tablero {
             this.celda1 = celda;
             this.celda1.removeEventListener('click', this.despejar);
             this.primerEmoji = valorCelda;
+
+            if (this.emojiReferencia != this.primerEmoji) {
+                this.emojiReferencia = this.primerEmoji;
+                this.intentos = 1;
+            } else {
+                this.intentos++;
+            }
+
         } else {
+
             celda.innerHTML = valorCelda;
             this.celda2 = celda;
             this.segundoEmoji = valorCelda;
             this.celda1.addEventListener('click', this.despejar);
-        }
 
-        console.log(this.segundoEmoji);
+            if (this.emojiReferencia == this.segundoEmoji) {
 
-        if (this.primerEmoji == this.segundoEmoji) {
+                this.primerEmoji = undefined;
+                this.segundoEmoji = undefined;
+                this.celda1.removeEventListener('click', this.despejar);
+                this.celda2.removeEventListener('click', this.despejar);
 
-            this.primerEmoji = undefined;
-            this.segundoEmoji = undefined;
-            this.celda1.removeEventListener('click', this.despejar);
-            this.celda2.removeEventListener('click', this.despejar);
+                let nodoPuntuacion = document.getElementById("puntuacion");
+                let puntuacion = this.puntuacion + 0;
 
-        } else if (this.segundoEmoji === undefined) {
-            return;
-        } else {
+                switch (this.intentos) {
+                    case this.intentos = 1:
+                        return nodoPuntuacion.innerHTML = puntuacion + 10;
+                    case this.intentos = 2:
+                        return nodoPuntuacion.innerHTML = puntuacion + 5;
+                    case this.intentos = 3:
+                        return nodoPuntuacion.innerHTML = puntuacion + 2.5;
+                    case this.intentos > 3:
+                        return nodoPuntuacion.innerHTML = puntuacion + 0;
+                }
 
-            this.celda1.style.backgroundColor = "darkslategray";
-            this.celda2.style.backgroundColor = "darkslategray";
+            } else if (this.segundoEmoji === undefined) {
+                return;
+            } else if (this.emojiReferencia != this.segundoEmoji) {
 
-            this.celda1.innerHTML = '';
-            this.celda2.innerHTML = '';
+                this.celda1.style.backgroundColor = "darkslategray";
+                this.celda2.style.backgroundColor = "darkslategray";
 
-            this.primerEmoji = undefined;
-            this.segundoEmoji = undefined;
+                this.celda1.innerHTML = '';
+                this.celda2.innerHTML = '';
+
+                this.primerEmoji = undefined;
+                this.segundoEmoji = undefined;
+            }
         }
 
     }
