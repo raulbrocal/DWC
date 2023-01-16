@@ -2,7 +2,7 @@ document.write('<h1>Juego de memoria</h1>');
 document.write('<br>');
 document.write('<h2>Raúl Brocal</h2>');
 document.write('<br>');
-document.write('<b>Puntuación: 0/0</b>');
+document.write(`<b>Puntuación: <var id='puntuacion'>0</var>/<var id='maxPuntuacion'></var></b>`);
 document.write('<br><br>');
 
 class Tablero {
@@ -11,6 +11,7 @@ class Tablero {
         // Datos necesarios para crear el tablero.
         this.numFilasColumnas();
         this.crearTableroVacio();
+        this.maxPuntuacion();
     }
 
     numFilasColumnas() {
@@ -80,6 +81,12 @@ class Tablero {
         }
 
         document.body.appendChild(tabla);
+    }
+
+    maxPuntuacion() {
+        let maxPuntuacion = (this.filas * this.columnas) * 10;
+        let nodoMaxPuntuacion = document.getElementById("maxPuntuacion");
+        nodoMaxPuntuacion.innerHTML = maxPuntuacion;
     }
 
 }
@@ -196,10 +203,6 @@ class JuegoMemoria extends Tablero {
             this.primerEmoji = undefined;
             this.segundoEmoji = undefined;
         }
-
-    }
-
-    puntuacion(emoji1, emoji2){
 
     }
 
