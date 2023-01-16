@@ -165,11 +165,13 @@ class JuegoMemoria extends Tablero {
         if (this.primerEmoji === undefined) {
             celda.innerHTML = valorCelda;
             this.celda1 = celda;
+            this.celda1.removeEventListener('click', this.despejar);
             this.primerEmoji = valorCelda;
         } else {
             celda.innerHTML = valorCelda;
             this.celda2 = celda;
             this.segundoEmoji = valorCelda;
+            this.celda1.addEventListener('click', this.despejar);
         }
 
         console.log(this.segundoEmoji);
@@ -194,6 +196,10 @@ class JuegoMemoria extends Tablero {
             this.primerEmoji = undefined;
             this.segundoEmoji = undefined;
         }
+
+    }
+
+    puntuacion(emoji1, emoji2){
 
     }
 
