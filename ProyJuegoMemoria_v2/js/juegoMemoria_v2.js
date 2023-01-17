@@ -210,17 +210,21 @@ class JuegoMemoria extends Tablero {
                 return;
             } else if (this.emojiReferencia != this.segundoEmoji) {
 
-                this.celda1.style.backgroundColor = "darkslategray";
-                this.celda2.style.backgroundColor = "darkslategray";
-
-                this.celda1.innerHTML = '';
-                this.celda2.innerHTML = '';
+                this.taparCelda(this.celda1,this.celda2);
 
                 this.primerEmoji = undefined;
                 this.segundoEmoji = undefined;
             }
         }
 
+    }
+
+    taparCelda(celda1, celda2) {
+        celda1.style.backgroundColor = "darkslategray";
+        celda2.style.backgroundColor = "darkslategray";
+
+        celda1.innerHTML = '';
+        celda2.innerHTML = '';
     }
 
 }
