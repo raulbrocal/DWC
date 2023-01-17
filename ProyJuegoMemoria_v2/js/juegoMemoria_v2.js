@@ -4,6 +4,7 @@ document.write('<h2>Raúl Brocal</h2>');
 document.write('<br>');
 document.write(`<b>Puntuación: <var id='puntuacion'>0</var>/<var id='maxPuntuacion'></var></b>`);
 document.write('<br><br>');
+document.write('<input name="reiniciar" type="button" onclick="if (confirm(`Deseas reiniciar la partida ?`) == true) {location.reload();}" value="Reiniciar"/>')
 
 class Tablero {
 
