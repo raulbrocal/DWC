@@ -210,7 +210,9 @@ class JuegoMemoria extends Tablero {
                 return;
             } else if (this.emojiReferencia != this.segundoEmoji) {
 
-                this.taparCelda(this.celda1,this.celda2);
+                setTimeout(() => {
+                    this.taparCelda(this.celda1, this.celda2);
+                }, 500);
 
                 this.primerEmoji = undefined;
                 this.segundoEmoji = undefined;
