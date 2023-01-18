@@ -5,6 +5,7 @@ document.write('<br>');
 document.write(`<b>Puntuación: <var id='puntuacion'>0</var>/<var id='maxPuntuacion'></var></b>`);
 document.write('<br><br>');
 document.write('<input name="reiniciar" type="button" onclick="if (confirm(`Deseas reiniciar la partida ?`) == true) {location.reload();}" value="Reiniciar"/>')
+document.write('<div class="tiempo" id="tiempo">00:00:00.000</div>');
 
 class Tablero {
 
@@ -98,6 +99,7 @@ class JuegoMemoria extends Tablero {
         this.puntuacion = 0;
         this.colocarParejas();
         this.dibujarTableroDOM();
+        this.cronometro();
     }
 
     colocarParejas() {
@@ -228,6 +230,19 @@ class JuegoMemoria extends Tablero {
 
         celda1.innerHTML = '';
         celda2.innerHTML = '';
+    }
+
+    cronometro(){
+
+        let tiempoRef = Date.now();
+        let acumulado = 0;
+
+        setInterval(() => {
+            let tiempo = document.getElementById("tiempo");
+            acumulado += Date.now() - tiempoRef;
+            tiempoRef = Date.now()
+            tiempo.innerHTML = acumulado;
+        }, 1000/60)
     }
 
 }
