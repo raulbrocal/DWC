@@ -5,7 +5,7 @@ document.write('<br>');
 document.write(`<b>Puntuación: <var id='puntuacion'>0</var>/<var id='maxPuntuacion'></var></b>`);
 document.write('<br><br>');
 document.write('<input name="reiniciar" type="button" onclick="if (confirm(`Deseas reiniciar la partida ?`) == true) {location.reload();}" value="Reiniciar"/>')
-document.write('<div class="tiempo" id="tiempo">00:00:00.000</div>');
+document.write('<div id="tiempo">00:00:00.000</div>');
 
 class Tablero {
 
@@ -270,13 +270,18 @@ class JuegoMemoria extends Tablero {
 
     finalizar() {
         if (this.maxParejas == this.numParejas) {
-            this.mensajeFinal();
-        }
-    }
 
-    mensajeFinal() {
-        alert("Enhorabuena has terminado el juego.");
-        document.location.reload();
+            let tiempo = document.getElementById("tiempo").textContent;
+            alert
+                (`
+                    Enhorabuena!! El juego ha finalizado. 
+
+                    Has tenido una puntuación de ${this.puntuacion} puntos.
+        
+                    Tu tiempo trancurrido ha sido de ${tiempo}`);
+
+            document.location.reload();
+        }
     }
 
 }
