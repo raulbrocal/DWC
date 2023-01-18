@@ -279,8 +279,7 @@ class JuegoMemoria extends Tablero {
                     Has tenido una puntuación de ${this.puntuacion} puntos.
         
                     Tu tiempo trancurrido ha sido de ${tiempo}`);
-
-            document.location.reload();
+            window.stop();
         }
     }
 
