@@ -97,6 +97,8 @@ class JuegoMemoria extends Tablero {
     constructor(filas, columnas, _puntuacion) {
         super(filas, columnas);
         this.puntuacion = 0;
+        this.numParejas = 0;
+        this.maxParejas = (this.filas * this.columnas) / 2;
         this.colocarParejas();
         this.dibujarTableroDOM();
         this.cronometro();
@@ -175,8 +177,8 @@ class JuegoMemoria extends Tablero {
             this.celda1.removeEventListener('click', this.despejar);
             this.primerEmoji = valorCelda;
 
-            if (this.emojiReferencia != this.primerEmoji) {
-                this.emojiReferencia = this.primerEmoji;
+            if (this.celdaReferencia != this.celda1) {
+                this.celdaReferencia = this.celda1;
                 this.intentos = 1;
             } else {
                 this.intentos++;
@@ -189,7 +191,9 @@ class JuegoMemoria extends Tablero {
             this.segundoEmoji = valorCelda;
             this.celda1.addEventListener('click', this.despejar);
 
-            if (this.emojiReferencia == this.segundoEmoji) {
+            if (this.primerEmoji == this.segundoEmoji && this.celdaReferencia == this.celda1) {
+
+                this.numParejas += 1;
 
                 this.primerEmoji = undefined;
                 this.segundoEmoji = undefined;
@@ -200,13 +204,21 @@ class JuegoMemoria extends Tablero {
 
                 switch (this.intentos) {
                     case this.intentos = 1:
-                        return nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 10;
+                        nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 10;
+                        this.finalizar();
+                        break;
                     case this.intentos = 2:
-                        return nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 5;
+                        nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 5;
+                        this.finalizar();
+                        break;
                     case this.intentos = 3:
-                        return nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 2.5;
+                        nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 2.5;
+                        this.finalizar();
+                        break;
                     case this.intentos > 3:
-                        return nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 0;
+                        nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 0;
+                        this.finalizar();
+                        break;
                 }
 
             } else if (this.segundoEmoji === undefined) {
@@ -215,7 +227,7 @@ class JuegoMemoria extends Tablero {
 
                 setTimeout(() => {
                     this.taparCelda(this.celda1, this.celda2);
-                },400);
+                }, 400);
 
                 this.primerEmoji = undefined;
                 this.segundoEmoji = undefined;
@@ -254,6 +266,17 @@ class JuegoMemoria extends Tablero {
             return (this + "").padStart(n, 0)
         }
         return H.ceros(2) + ":" + M.ceros(2) + ":" + S.ceros(2) + "." + MS.ceros(3);
+    }
+
+    finalizar() {
+        if (this.maxParejas == this.numParejas) {
+            this.mensajeFinal();
+        }
+    }
+
+    mensajeFinal() {
+        alert("Enhorabuena has terminado el juego.");
+        document.location.reload();
     }
 
 }
