@@ -77,7 +77,6 @@ class Tablero {
                 columna.id = `f${i}_c${j}`;
                 columna.dataset.fila = i;
                 columna.dataset.columna = j;
-                columna.dataset.despejado = false;
                 fila.appendChild(columna);
             }
         }
@@ -110,9 +109,11 @@ class JuegoMemoria extends Tablero {
 
         // Colocamos de forma aleatoria las parejas necesarias.
         let contadorParejas = 0;
+        let parejaRealizada = 0;
         let posFila;
         let posColumna;
         let contador = 0;
+        let maxParejas = this.filas * this.columnas;
 
         while (contadorParejas < (this.filas * this.columnas)) {
 
@@ -124,15 +125,18 @@ class JuegoMemoria extends Tablero {
                 if (!this.arrayTablero[posFila][posColumna].startsWith('&')) {
                     this.arrayTablero[posFila][posColumna] = parejas[contador];
                     contadorParejas++;
-                    if (contadorParejas == (this.filas * this.columnas)) {
+                    parejaRealizada++;
+                    if (contadorParejas == maxParejas) {
                         break;
                     };
                 };
 
 
-            } while (contadorParejas % 2 != 0 || contadorParejas == 1);
+            } while (parejaRealizada != 2 || contadorParejas == 1);
 
+            console.log(parejas[contador]);
             contador++;
+            parejaRealizada = 0;
 
             if (contador == parejas.length) {
                 contador = 0;
@@ -227,7 +231,7 @@ class JuegoMemoria extends Tablero {
 
                 setTimeout(() => {
                     this.taparCelda(this.celda1, this.celda2);
-                }, 400);
+                }, 300);
 
                 this.primerEmoji = undefined;
                 this.segundoEmoji = undefined;
@@ -249,7 +253,7 @@ class JuegoMemoria extends Tablero {
         let tiempoRef = Date.now();
         let acumulado = 0;
 
-        setInterval(() => {
+        this.timer = setInterval(() => {
             let tiempo = document.getElementById("tiempo");
             acumulado += Date.now() - tiempoRef;
             tiempoRef = Date.now()
@@ -279,7 +283,8 @@ class JuegoMemoria extends Tablero {
                     Has tenido una puntuación de ${this.puntuacion} puntos.
         
                     Tu tiempo trancurrido ha sido de ${tiempo}`);
-            window.stop();
+
+            window.clearInterval(this.timer);
         }
     }
 
