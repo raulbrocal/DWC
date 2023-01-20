@@ -209,19 +209,19 @@ class JuegoMemoria extends Tablero {
                 switch (this.intentos) {
                     case this.intentos = 1:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 10;
-                        this.finalizar();
+                        setTimeout(this.finalizar.bind(this),10);
                         break;
                     case this.intentos = 2:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 5;
-                        this.finalizar();
+                        setTimeout(this.finalizar.bind(this),10);
                         break;
                     case this.intentos = 3:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 2.5;
-                        this.finalizar();
+                        setTimeout(this.finalizar.bind(this),10);
                         break;
                     case this.intentos > 3:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 0;
-                        this.finalizar();
+                        setTimeout(this.finalizar.bind(this),10);
                         break;
                 }
 
