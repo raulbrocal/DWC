@@ -197,8 +197,6 @@ class JuegoMemoria extends Tablero {
 
             if (this.primerEmoji == this.segundoEmoji && this.celdaReferencia == this.celda1) {
 
-                this.numParejas += 1;
-
                 this.primerEmoji = undefined;
                 this.segundoEmoji = undefined;
                 this.celda1.removeEventListener('click', this.despejar);
@@ -209,19 +207,19 @@ class JuegoMemoria extends Tablero {
                 switch (this.intentos) {
                     case this.intentos = 1:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 10;
-                        setTimeout(this.finalizar.bind(this),10);
+                        setTimeout(this.finalizar.bind(this), 10);
                         break;
                     case this.intentos = 2:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 5;
-                        setTimeout(this.finalizar.bind(this),10);
+                        setTimeout(this.finalizar.bind(this), 10);
                         break;
                     case this.intentos = 3:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 2.5;
-                        setTimeout(this.finalizar.bind(this),10);
+                        setTimeout(this.finalizar.bind(this), 10);
                         break;
                     case this.intentos > 3:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 0;
-                        setTimeout(this.finalizar.bind(this),10);
+                        setTimeout(this.finalizar.bind(this), 10);
                         break;
                 }
 
@@ -238,6 +236,47 @@ class JuegoMemoria extends Tablero {
             }
         }
 
+/*        if (this.primerEmoji == this.segundoEmoji) {
+            if (this.celdaReferencia1 == this.celda1 || this.celdaReferencia2 == this.celda2) {
+                this.primerEmoji = undefined;
+                this.segundoEmoji = undefined;
+                this.celda1.removeEventListener('click', this.despejar);
+                this.celda2.removeEventListener('click', this.despejar);
+                this.intentos = 1;
+                this.puntos(this.intentos);
+            }
+        } else {
+
+        }
+
+    }
+
+    puntos(intentos) {
+        this.primerEmoji = undefined;
+        this.segundoEmoji = undefined;
+        this.celda1.removeEventListener('click', this.despejar);
+        this.celda2.removeEventListener('click', this.despejar);
+
+        let nodoPuntuacion = document.getElementById("puntuacion");
+
+        switch (intentos) {
+            case intentos = 1:
+                nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 10;
+                setTimeout(this.finalizar.bind(this), 10);
+                break;
+            case intentos = 2:
+                nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 5;
+                setTimeout(this.finalizar.bind(this), 10);
+                break;
+            case intentos = 3:
+                nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 2.5;
+                setTimeout(this.finalizar.bind(this), 10);
+                break;
+            case intentos > 3:
+                nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 0;
+                setTimeout(this.finalizar.bind(this), 10);
+                break;
+        }*/
     }
 
     taparCelda(celda1, celda2) {
