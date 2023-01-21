@@ -11,7 +11,15 @@
 </head>
 
 <body>
-    
+    <h1>Juego de memoria</h1>
+    <br>
+    <h2>Raúl Brocal</h2>
+    <br>
+    <b>Puntuación: <var id='puntuacion'>0</var>/<var id='maxPuntuacion'></var></b>
+    <br><br>
+    <input name="reiniciar" type="button"
+        onclick="if (confirm(`Deseas reiniciar la partida ?`) == true) {location.reload();}" value="Reiniciar" />
+    <div id="tiempo">00:00:00.000</div>
 </body>
 
 </html>

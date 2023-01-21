@@ -1,14 +1,7 @@
-document.write('<h1>Juego de memoria</h1>');
-document.write('<br>');
-document.write('<h2>Raúl Brocal</h2>');
-document.write('<br>');
-document.write(`<b>Puntuación: <var id='puntuacion'>0</var>/<var id='maxPuntuacion'></var></b>`);
-document.write('<br><br>');
-document.write('<input name="reiniciar" type="button" onclick="if (confirm(`Deseas reiniciar la partida ?`) == true) {location.reload();}" value="Reiniciar"/>')
-document.write('<div id="tiempo">00:00:00.000</div>');
 class Tablero {
+    //Clase Tablero encargada de marcar la máxima puntuación y crear y mostrar el tablero visible y no visible.
     constructor() {
-        // Datos necesarios para crear el tablero.
+        // Funciones necesarias para crear el tablero.
         this.numFilasColumnas();
         this.crearTableroVacio();
         this.maxPuntuacion();
@@ -67,6 +60,7 @@ class Tablero {
         document.body.appendChild(tabla);
     }
     maxPuntuacion() {
+        //Calcula la máxima puntuación posible y la representa en el contador.
         let maxPuntuacion = ((this.filas * this.columnas) * 10) / 2;
         let nodoMaxPuntuacion = document.getElementById("maxPuntuacion");
         nodoMaxPuntuacion.innerHTML = maxPuntuacion;
@@ -81,16 +75,19 @@ class JuegoMemoria extends Tablero {
         this.colocarParejas();
         this.dibujarTableroDOM();
     }
+
     colocarParejas() {
         // Array de emojis que formaran las parejas
         let parejas = ['&#10084;&#65039', '&#129505', '&#10084;&#65039;&#8205;&#128293', '&#128155', '&#128154', '&#128153', '&#128156', '&#129294', '&#128420', '&#129293'];
-        // Colocamos de forma aleatoria las parejas necesarias.
+
         let contadorParejas = 0;
         let parejaRealizada = 0;
         let posFila;
         let posColumna;
         let contador = 0;
         let maxParejas = this.filas * this.columnas;
+
+        // Colocamos de forma aleatoria las parejas necesarias.
         while (contadorParejas < (this.filas * this.columnas)) {
             do {
                 posFila = Math.floor(Math.random() * this.filas);
@@ -114,7 +111,10 @@ class JuegoMemoria extends Tablero {
         console.log(this.arrayTablero);
         return this.arrayTablero
     }
+
     dibujarTableroDOM() {
+        //Volvemos a dibujar el tablero añadiendo los eventos para poder interactuar con todas sus celdas.
+
         super.dibujarTableroDOM();
         let celda;
         this.despejar = this.despejar.bind(this);
@@ -125,18 +125,24 @@ class JuegoMemoria extends Tablero {
             }
         }
     }
+
     despejar(elEvento) {
+        //Mostramos la casilla que clicamos y comprueba si se clica otra.
+
+        //Al hacer clic, iniciamos el cronómetro.
         let tiempo = document.getElementById("tiempo").textContent;
         if (tiempo == '00:00:00.000') {
             this.cronometro();
         }
+
         let evento = elEvento || window.event;
         let celda = evento.currentTarget;
         let fila = parseInt(celda.dataset.fila);
         let columna = parseInt(celda.dataset.columna);
-        // Marcar la celda despejada
         celda.style.backgroundColor = "lightgrey";
         let valorCelda = this.arrayTablero[fila][columna];
+
+        //Guardamos los valores de los emojis seleccionados
         if (this.primerEmoji === undefined) {
             celda.innerHTML = valorCelda;
             this.celda1 = celda;
@@ -153,6 +159,8 @@ class JuegoMemoria extends Tablero {
             this.celda2 = celda;
             this.segundoEmoji = valorCelda;
             this.celda1.addEventListener('click', this.despejar);
+
+            //Si los dos emojis coinciden, asignamos la puntuación en función de los intentos realizados.
             if (this.primerEmoji == this.segundoEmoji && this.celdaReferencia == this.celda1) {
                 this.numParejas += 1;
                 this.primerEmoji = undefined;
@@ -163,50 +171,59 @@ class JuegoMemoria extends Tablero {
                 switch (this.intentos) {
                     case this.intentos = 1:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 10;
-                        setTimeout(this.finalizar.bind(this),10);
+                        setTimeout(this.finalizar.bind(this), 10);
                         break;
                     case this.intentos = 2:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 5;
-                        setTimeout(this.finalizar.bind(this),10);
+                        setTimeout(this.finalizar.bind(this), 10);
                         break;
                     case this.intentos = 3:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 2.5;
-                        setTimeout(this.finalizar.bind(this),10);
+                        setTimeout(this.finalizar.bind(this), 10);
                         break;
                     case this.intentos > 3:
                         nodoPuntuacion.innerHTML = this.puntuacion = this.puntuacion + 0;
-                        setTimeout(this.finalizar.bind(this),10);
+                        setTimeout(this.finalizar.bind(this), 10);
                         break;
                 }
 
             } else if (this.segundoEmoji === undefined) {
                 return;
             } else if (this.emojiReferencia != this.segundoEmoji) {
+                //Si son emojis distintos, dejamos un tiempo para que el jugador pueda ver los dos emojis.
                 setTimeout(() => {
                     this.taparCelda(this.celda1, this.celda2);
                 }, 300);
                 this.primerEmoji = undefined;
                 this.segundoEmoji = undefined;
             }
+
         }
     }
+
     taparCelda(celda1, celda2) {
+        //Tapamos los emojis que han sido destapados.
         celda1.style.backgroundColor = "darkslategray";
         celda2.style.backgroundColor = "darkslategray";
         celda1.innerHTML = '';
         celda2.innerHTML = '';
     }
+
     cronometro() {
+        //Cronómetro en milisegundos
+
         let tiempoRef = Date.now();
         let acumulado = 0;
-        let tiempo = document.getElementById("tiempo");
         this.timer = setInterval(() => {
             acumulado += Date.now() - tiempoRef;
             tiempoRef = Date.now()
             tiempo.innerHTML = this.formatearMS(acumulado);
         }, 1000 / 60)
     }
+
     formatearMS(tiempo_ms) {
+        //Dar formato horas, minutos, segundos y milisegundos a nuestro crnómetro.
+
         let MS = tiempo_ms % 1000;
         let S = Math.floor(((tiempo_ms - MS) / 1000) % 60);
         let M = Math.floor((S / 60) % 60);
@@ -216,7 +233,10 @@ class JuegoMemoria extends Tablero {
         }
         return H.ceros(2) + ":" + M.ceros(2) + ":" + S.ceros(2) + "." + MS.ceros(3);
     }
+
     finalizar() {
+        //Mensaje de enhorabuena junto a la puntuación y el tiempo en terminar el juego.
+
         if (this.maxParejas == this.numParejas) {
             let tiempo = document.getElementById("tiempo").textContent;
             alert
