@@ -216,18 +216,19 @@ class JuegoMemoria extends Tablero {
         let acumulado = 0;
         this.timer = setInterval(() => {
             acumulado += Date.now() - tiempoRef;
-            tiempoRef = Date.now()
+            tiempoRef = Date.now();
             tiempo.innerHTML = this.formatearMS(acumulado);
-        }, 1000 / 60)
+        }, 1000 / 60);
     }
 
     formatearMS(tiempo_ms) {
         //Dar formato horas, minutos, segundos y milisegundos a nuestro crnómetro.
 
         let MS = tiempo_ms % 1000;
-        let S = Math.floor(((tiempo_ms - MS) / 1000) % 60);
-        let M = Math.floor((S / 60) % 60);
-        let H = Math.floor((M / 60));
+        let St = Math.floor(((tiempo_ms - MS) / 1000))
+        let S = St % 60
+        let M = Math.floor((St / 60) % 60)
+        let H = Math.floor((St / 60 / 60))
         Number.prototype.ceros = function (n) {
             return (this + "").padStart(n, 0)
         }
