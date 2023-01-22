@@ -155,6 +155,7 @@ class JuegoMemoria extends Tablero {
                 this.intentos++;
             }
         } else {
+            // La puntuación va en funcion de la primera celda seleccionada, si se cambia de celda, se restearan los intentos.
             celda.innerHTML = valorCelda;
             this.celda2 = celda;
             this.segundoEmoji = valorCelda;
