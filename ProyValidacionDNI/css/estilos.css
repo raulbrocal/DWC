@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.contenedor {
+    width: 100%;
+    height: 100%;
+    background-color: lightgray;
+    text-align: center;
+}
+
+label {
+    width: 150px;
+    display: inline-block;
+    text-align: left;
+    font-size: 1rem;
+    font-family: 'Lato';
+    padding-top: 15px;
+    margin-bottom: 5px;
+}
+
+input {
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 100;
+    font-family: 'Lato';
+    width: 100%;
+    height: 40px;
+}
+
+form {
+    margin: auto;
+    border: 5px solid #ccc;
+    border-radius: 5px;
+    width: 500px;
+    background: lightblue;
+    text-align: left;
+    padding: 5px;
+}
+
+button {
+    padding: 2%;
+    width: 100%;
+    font-family: 'Lato';
+    font-weight: 100;
+    background: grey;
+    border-radius: 15px;
+}
