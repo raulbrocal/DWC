@@ -9,7 +9,7 @@ function validarNombre() {
     this.className = "";
 
     if (esValido) {
-        this.className.set("verde");
+        this.className = "verde";
     }
 }
 
@@ -17,18 +17,23 @@ function validarNombre() {
  * Función para validar el email del formulario
  */
 function validarEmail() {
-    let patron = /^[A-Za-záéíóúüàèìòùÁÀÉÈÍÌÓÒÚÙÜñÑçÇ]{2,}.@.[A-Za-záéíóúüàèìòùÁÀÉÈÍÌÓÒÚÙÜñÑçÇ]{2,}$/;
-    
+    let patron = /^+.@.+$/;
+
     let esValido = patron.test(this.value);
 
     this.className = "";
 
     if (esValido) {
-        this.className.set("verde");
+        this.className = "verde";
     }
 }
 
 window.addEventListener('load', function () {
     let nombre = document.getElementById('nombre');
-    nombre.addEventListener('keyup', validarNombre());
+    let apellidos = document.getElementById('apellidos');
+    let email = document.getElementById('email');
+
+    nombre.addEventListener('keyup', validarNombre);
+    apellidos.addEventListener('keyup', validarNombre);    
+    email.addEventListener('keyup', validarEmail);
 });
