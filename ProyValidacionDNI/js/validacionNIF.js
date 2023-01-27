@@ -43,9 +43,9 @@ function validarDatos() {
     patrones.set("tiempo", /^([0-1][0-9]|2[0-4])(:[0-5][0-9]){2}$/);
     patrones.set("tarjetaVISA", /^4(([0-9]{12})|([0-9]{15}))$/);
     patrones.set("tarjetaMasterCard", /^5[1-5][0-9]{14}$/);
-    patrones.set("tarjetaDiscover", /^^(6011[0-9]{12})|(5[0-9]{14})$/);
-    patrones.set("tarjetaAmericanExpress", /^^(34|37)[0-9]{13}$$/);
-    patrones.set("tarjetaDinersClub", /^^(30[0-5][0-9]{11})|(36|38)[0-9]{12}$/);
+    patrones.set("tarjetaDiscover", /^(6011[0-9]{12})|(5[0-9]{14})$/);
+    patrones.set("tarjetaAmericanExpress", /^(34|37)[0-9]{13}$$/);
+    patrones.set("tarjetaDinersClub", /^(30[0-5][0-9]{11})|(36|38)[0-9]{12}$/);
     patrones.set("tarjetaJCB", /^((2131|1800)[0-9]{11})|(35[0-9]{14})$/);
 
 
