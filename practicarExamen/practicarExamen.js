@@ -86,3 +86,10 @@ function cambiarColorDiv3(elemento) {
         this.despejarCelda(celdaNueva);
     }
 */
+
+let enlaces = document.getElementsByTagName('a');
+enlaces.href = "http://iessonferrer.net/"
+
+for(enlace of enlaces){
+    
+}
