@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
     let nodoDiv = document.getElementById("info");
     let nodosLink = document.getElementsByTagName('a');
     let nodoP1 = document.createElement('p');
@@ -14,7 +14,7 @@ window.onload = function() {
 
     let nodoP3 = document.createElement('p');
     nodoP3.innerHTML = `El penúltim enllaç apunta a = ${nodosLink[nodosLink.length - 2]}`;
-    nodoDiv.appendChild(nodoP3); 
+    nodoDiv.appendChild(nodoP3);
 
     let nodoP4 = document.createElement('p');
     nodoP4.innerHTML = `L'últim enllaç apunta a = ${nodosLink[nodosLink.length - 1]}`;
@@ -31,7 +31,7 @@ window.onload = function() {
     nodoP5.innerHTML = `${contadorEnlaces} enllaços apunten a http://prueba/`;
     nodoDiv.appendChild(nodoP5);
 
-    
+
     let nodoP6;
     let enlacesParrafo;
     let parrafo;
@@ -42,16 +42,29 @@ window.onload = function() {
         nodoP6.innerHTML = `Nombre d'enllaços del paràgraf = ${i + 1} = ${enlacesParrafo.length}`;
         nodoDiv.appendChild(nodoP6);
     }
-    
-}   
+
+    let nodoP7 = document.createElement('p');
+    nodoP7.id = 1;
+    nodoP7.innerHTML = "casa";
+    nodoDiv.appendChild(nodoP7);
+    let nodo = document.getElementById(1);
+    nodo.addEventListener("click", pintar);
+
+    function pintar() {
+        this.style.color = 'white';
+    }
+
+}
+
+
 
 function cambiarColorDiv3(elemento) {
-    if (elemento.style.borderColor == 'silver'){
-        elemento.style.borderColor='black';
-    } else if (elemento.style.borderColor == 'black'){
-        elemento.style.borderColor='silver';
+    if (elemento.style.borderColor == 'silver') {
+        elemento.style.borderColor = 'black';
+    } else if (elemento.style.borderColor == 'black') {
+        elemento.style.borderColor = 'silver';
     }
-        
+
 }
 
 /*
@@ -86,10 +99,3 @@ function cambiarColorDiv3(elemento) {
         this.despejarCelda(celdaNueva);
     }
 */
-
-let enlaces = document.getElementsByTagName('a');
-enlaces.href = "http://iessonferrer.net/"
-
-for(enlace of enlaces){
-    
-}
