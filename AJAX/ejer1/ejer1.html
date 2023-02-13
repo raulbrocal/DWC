@@ -15,7 +15,7 @@
                 xmlhttp.onload = function () {
                     document.getElementById("txtHint").innerHTML = this.responseText;
                 }
-                xmlhttp.open("GET", "ejer1.php?q=" + str);
+                xmlhttp.open("GET", "ejer1.php?q=" + str, true);
                 xmlhttp.send();
             }
         }

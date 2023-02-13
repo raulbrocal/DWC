@@ -1,5 +1,5 @@
 <?php
-header("access-control-allow-origin: *");
+header("Access-Control-Allow-Origin: *");
 header("Content-type:text/xml");
 $conexion = mysqli_connect('localhost', 'root', '12345', 'world');
 $conexion->set_charset("utf-8");
