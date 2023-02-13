@@ -1,8 +1,14 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-type:text/xml");
-$conexion = mysqli_connect('localhost', 'root', '12345', 'world');
-$conexion->set_charset("utf-8");
+
+$servername = "localhost";
+$username = "root";
+$password = "12345";
+$dbname = "world";
+
+$conexion = new mysqli($servername, $username, $password, $dbname);
+$conexion->set_charset("utf8");
 if ($conexion->connect_error) {
     die("Connection failed: " . $conexion->connect_error);
 }
