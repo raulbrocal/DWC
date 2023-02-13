@@ -1,35 +1,20 @@
 <?php
-// Array with names
-$a[] = "Anna";
-$a[] = "Brittany";
-$a[] = "Cinderella";
-$a[] = "Diana";
-$a[] = "Eva";
-$a[] = "Fiona";
-$a[] = "Gunda";
-$a[] = "Hege";
-$a[] = "Inga";
-$a[] = "Johanna";
-$a[] = "Kitty";
-$a[] = "Linda";
-$a[] = "Nina";
-$a[] = "Ophelia";
-$a[] = "Petunia";
-$a[] = "Amanda";
-$a[] = "Raquel";
-$a[] = "Cindy";
-$a[] = "Doris";
-$a[] = "Eve";
-$a[] = "Evita";
-$a[] = "Sunniva";
-$a[] = "Tove";
-$a[] = "Unni";
-$a[] = "Violet";
-$a[] = "Liza";
-$a[] = "Elizabeth";
-$a[] = "Ellen";
-$a[] = "Wenche";
-$a[] = "Vicky";
+header("access-control-allow-origin: *");
+header("Content-type:text/xml");
+$conexion = mysqli_connect('localhost', 'root', '12345', 'world');
+$conexion->set_charset("utf-8");
+if ($conexion->connect_error) {
+    die("Connection failed: " . $conexion->connect_error);
+}
+$consulta = mysqli_prepare($conexion, "SELECT Name FROM city;");
+$consulta->execute();
+$result = $consulta->get_result();
+$listaCiudades = array();
+while ($myrow = $result->fetch_assoc()) {
+    array_push($listaCiudades, implode($myrow));
+}
+$conexion->close();
+sort($listaCiudades);
 
 // get the q parameter from URL
 $q = $_REQUEST["q"];
@@ -40,7 +25,7 @@ $hint = "";
 if ($q !== "") {
     $q = strtolower($q);
     $len = strlen($q);
-    foreach ($a as $name) {
+    foreach ($listaCiudades as $name) {
         if (stristr($q, substr($name, 0, $len))) {
             if ($hint === "") {
                 $hint = $name;

@@ -4,16 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>XMLHttpRequest</title>
-</head>
-
-<body>
-    <h1>Suggeriments</h1>
-
-    <p>Introdueix una ciutat: <br><input type="text" id="txt1" onkeyup="showHint(this.value)"></p>
-    <p><span id="txtHint"></span></p>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script>
-        function showHint(str) {
+        function loadXMLDoc(str) {
             if (str.length == 0) {
                 document.getElementById("txtHint").innerHTML = "";
                 return;
@@ -27,6 +20,14 @@
             }
         }
     </script>
+</head>
+
+<body>
+    <h1>Suggeriments</h1>
+
+    <p>Introdueix una ciutat: <br><input type="text" id="txt1" onkeyup="loadXMLDoc(this.value)"></p>
+    <p><span id="txtHint"></span></p>
+
 </body>
 
 </html>
